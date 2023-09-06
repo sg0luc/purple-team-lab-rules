@@ -1,0 +1,39 @@
+title: Shadow Copy Deletion Detected
+status: experimental
+description: Detecta exclusões de shadow copies através do utilitário VSSAdmin.exe
+author: Sg0luc
+date: 2023-09-06
+references:
+	- https://attack.mitre.org/techniques/T1490/
+	- https://attack.mitre.org/software/S1068/
+tags:
+	- attack.impact
+	- blackcat
+	- ransomware
+
+logsource:
+	category: security
+	product: windows
+
+detection:
+	Event:
+		EventID: 4688
+		CommandLine|contains:
+			- 'cmd' 
+			- 'powershell'
+	CommandLine:
+		CommandLine|contains:
+			- 'wmic'
+			- 'shadowcopy'
+	condition: Event AND CommandLine
+
+level: high
+
+falsepositives:
+	- Atividades de rotina
+	- Execuções legítimas advindas de usuários de serviço
+
+fields:
+	- SubjectUserName
+	- SourceAddress
+	- CommandLine
