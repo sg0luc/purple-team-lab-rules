@@ -4,29 +4,29 @@ description: Detecta a execução de comando PowerShell codificado em Base64
 author: Sg0luc
 date: 2023-09-06
 references:
-	- https://attack.mitre.org/techniques/T1059/001/
+  - https://attack.mitre.org/techniques/T1059/001/
 tags:
-	- attack.execution
-	- powershell
-	- base64
+  - attack.execution
+  - powershell
+  - base64
 
 logsource:
-	category: powershell
-	product: windows
+  category: powershell
+  product: windows
 
 detection:
-	Event:
-		EventID: 4104
-		CommandLine|contains:
-			- '-Enc' # -Enc ou -EncodedCommand
-	condition: Event
+  Event:
+    EventID: 4104
+      CommandLine|contains:
+        - '-Enc' # -Enc ou -EncodedCommand
+  condition: Event
 
 level: high
 
 falsepositives:
-	- Serviços automatizados que executam comandos codificados em Base64 de forma legítima
+  - Serviços automatizados que executam comandos codificados em Base64 de forma legítima
 
 fields:
-	- SubjectUserName
-	- SourceAddress
-	- CommandLine
+  - SubjectUserName
+  - SourceAddress
+  - CommandLine
