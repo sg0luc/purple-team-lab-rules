@@ -17,14 +17,14 @@ logsource:
 detection:
 	Event:
 		EventID: 4104
-		CommandLine|base64:
-			- '*'
+		CommandLine|contains:
+			- '-Enc' # -Enc ou -EncodedCommand
 	condition: Event
 
 level: high
 
 falsepositives:
-	- n/a
+	- Serviços automatizados que executam comandos codificados em Base64 de forma legítima
 
 fields:
 	- SubjectUserName
