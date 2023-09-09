@@ -1,0 +1,32 @@
+title: Possible Ransomware Activity via ForFiles Utility
+status: experimental
+description: Detecta possíveis atividades de ransomware em múltiplos arquivos através do utilitário ForFiles
+author: Sg0luc
+date: 2023-09-09
+references:
+	- https://attack.mitre.org/techniques/T1486/
+tags:
+	- attack.impact
+	- ransomware
+
+logsource:
+	category: security
+	product: windows
+
+detection:
+	Event:
+		EventID: 4688
+		CommandLine|contains|all:
+			- 'forfiles'
+			- '/P'
+			- 'ren'
+	condition: Event
+
+level: high
+
+falsepositives:
+ - n/a
+
+fields:
+	- SubjectUserName
+	- CommandLine	
