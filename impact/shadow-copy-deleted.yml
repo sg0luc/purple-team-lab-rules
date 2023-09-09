@@ -1,6 +1,6 @@
-title: Shadow Copy Deletion Detected
+title: Shadow Copy Deleted
 status: experimental
-description: Detecta exclusões de shadow copies através do utilitário VSSAdmin.exe
+description: Detecta exclusões de shadow copies através do utilitário wmic.exe
 author: Sg0luc
 date: 2023-09-06
 references:
