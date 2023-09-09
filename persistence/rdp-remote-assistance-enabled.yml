@@ -1,0 +1,34 @@
+title: RDP Remote Assistance Enabled
+status: experimental
+description: Detecta a ativação do recurso de Assistência Remota via RDP em um endpoint
+author: Sg0luc
+date: 2023-09-09
+references:
+	- https://attack.mitre.org/techniques/T1133/
+tags:
+	- attack.persistence
+	- registry
+
+logsource:
+	category: security
+	product: windows
+
+detection:
+	Event:
+		EventID: 4688
+	CommandLine|contains|all:
+		- 'reg add'
+		- 'Terminal Server'
+		- 'fAllowToGetHelp'
+		- 'REG_DWORD /d 1'
+	condition: Event AND CommandLine
+
+level: medium
+
+falsepositives:
+	- Ativação legítima do recurso de Assistência Remota via RDP
+
+fields:
+	- SubjectUserName
+	- SourceAdress
+	- CommandLine
