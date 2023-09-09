@@ -17,8 +17,8 @@ logsource:
 detection:
   Event:
     EventID: 4104
-      CommandLine|contains:
-        - '-Enc' # -Enc ou -EncodedCommand
+    CommandLine|contains:
+      - '-Enc' # -Enc ou -EncodedCommand
   condition: Event
 
 level: high
