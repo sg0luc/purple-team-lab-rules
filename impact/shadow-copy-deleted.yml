@@ -21,12 +21,17 @@ detection:
 		CommandLine|contains:
 			- 'cmd' 
 			- 'powershell'
-	CommandLine:
+	WMIC:
 		CommandLine|contains|all:
 			- 'wmic'
 			- 'shadowcopy'
 			- 'delete'
-	condition: Event AND CommandLine
+	VSSAdmin:
+		CommandLine|contains|all:
+			- 'vssadmin'
+			- 'delete'
+			- 'shadows'
+	condition: Event AND (WMIC OR VSSAdmin)
 
 level: high
 
@@ -36,5 +41,4 @@ falsepositives:
 
 fields:
 	- SubjectUserName
-	- SourceAddress
 	- CommandLine
