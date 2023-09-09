@@ -31,7 +31,12 @@ detection:
 			- 'vssadmin'
 			- 'delete'
 			- 'shadows'
-	condition: Event AND (WMIC OR VSSAdmin)
+	WBAdmin:
+		CommandLine|contains|all:
+			- 'wbadmin'
+			- 'delete'
+			- 'catalog'
+	condition: Event AND (WMIC OR VSSAdmin OR WBAdmin)
 
 level: high
 
