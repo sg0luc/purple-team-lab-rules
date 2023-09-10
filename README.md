@@ -1,1 +1,0 @@
-# Sgoluc Sigma Rules
