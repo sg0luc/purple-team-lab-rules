@@ -3,7 +3,7 @@ status: experimental
 description: Detecta eventos de possível desativação da chave EnableLUA no Windows, responsável pelo Controle de Conta de Usuário
 author: Sg0luc
 date: 2023-09-09
-referentes:
+references:
 	- https://attack.mitre.org/techniques/T1548/002/
 tags:
 	- attack.privilege-escalation
