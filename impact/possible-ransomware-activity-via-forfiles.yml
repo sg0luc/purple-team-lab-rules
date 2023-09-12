@@ -4,23 +4,23 @@ description: Detecta possíveis atividades de ransomware em múltiplos arquivos 
 author: Sg0luc
 date: 2023-09-09
 references:
-	- https://attack.mitre.org/techniques/T1486/
+  - https://attack.mitre.org/techniques/T1486/
+  - https://www.avira.com/en/blog/forfiles-used-in-a-living-off-the-land-attack-to-spread-ransomware
 tags:
-	- attack.impact
-	- ransomware
+  - attack.impact
+  - ransomware
 
 logsource:
-	category: security
-	product: windows
+  category: security
+  product: windows
 
 detection:
-	Event:
-		EventID: 4688
-		CommandLine|contains|all:
-			- 'forfiles'
-			- '/P'
-			- 'ren'
-	condition: Event
+  Event:
+    EventID: 4688
+    CommandLine|contains|all:
+      - 'forfiles'
+      - '/c'
+  condition: Event
 
 level: high
 
@@ -28,5 +28,5 @@ falsepositives:
  - n/a
 
 fields:
-	- SubjectUserName
-	- CommandLine	
+  - SubjectUserName
+  - CommandLine	
