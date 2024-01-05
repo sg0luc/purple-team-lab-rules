@@ -15,7 +15,7 @@ logsource:
 
 detection:
 	Event:
-		EventID: 4688
+		EventID: 4104
 		CommandLine|contains|all:
 			- 'Add-Content'
 			- 'Invoke-WebRequest'
