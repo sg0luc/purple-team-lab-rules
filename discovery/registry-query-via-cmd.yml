@@ -1,32 +1,28 @@
 title: Registry Query via CMD
+id: 0f4af4b3-d15f-47e9-817d-c364155dffb5
 status: experimental
 description: Detecta consultas realizadas ao Registro do Windows a partir do Prompt de Comando
 author: Sg0luc
 date: 2023-09-10
+modified: 2025-05-03
 references:
-	- https://attack.mitre.org/techniques/T1012/
+  - https://attack.mitre.org/techniques/T1012/
 tags:
-	- attack.discovery
-	- registry
-
+  - attack.discovery
+  - attack.t1012
 logsource:
-	category: security
-	product: windows
-
+  product: windows
+  category: process_creation
 detection:
-	Event:
-		EventID: 4688
-		CommandLine|contains|all:
-			- 'reg'
-			- 'query'
-		condition: Event
-
-level: low
-
+  Event:
+    CommandLine|contains|all:
+        - 'reg'
+        - 'query'
+  condition: Event
 falsepositives:
-	- Consulta executada por um usuário de serviço
-	- Consulta executada legitimamente por um usuário
-
+  - Consulta executada por um usuário de serviço
+  - Consulta executada legitimamente por um usuário
+level: low
 fields:
-	- SubjectUserName
-	- CommandLine
+  - SubjectUserName
+  - CommandLine

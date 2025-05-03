@@ -1,32 +1,28 @@
 title: Possible Ransomware Activity via ForFiles Utility
+id: 574fef51-9b5b-4a45-a359-abffd47a8c2a
 status: experimental
 description: Detecta possíveis atividades de ransomware em múltiplos arquivos através do utilitário ForFiles
 author: Sg0luc
 date: 2023-09-09
+modified: 2025-05-03
 references:
   - https://attack.mitre.org/techniques/T1486/
   - https://www.avira.com/en/blog/forfiles-used-in-a-living-off-the-land-attack-to-spread-ransomware
 tags:
   - attack.impact
-  - ransomware
-
+  - attack.t1486
 logsource:
-  category: security
   product: windows
-
+  category: process_creation
 detection:
   Event:
-    EventID: 4688
-    CommandLine|contains|all:
-      - 'forfiles'
-      - '/c'
-  condition: Event
-
-level: high
-
+    CommandLine|contains: 'forfiles'
+  Flags:
+    CommandLine|windash: '-c'
+  condition: Event and Flags
 falsepositives:
  - n/a
-
+level: high
 fields:
   - SubjectUserName
-  - CommandLine	
+  - CommandLine

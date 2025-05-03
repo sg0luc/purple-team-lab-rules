@@ -1,23 +1,21 @@
 title: Maximum SMB Connections Changed
+id: 0165ec9e-26cb-403f-906a-489aec3a7d7c
 status: experimental
 description: Detecta atividades de mudança na configuração MaxMpxCt, responsável por definir a quantidade máxima de conexões SMB, atividade conhecida pelo ransomware BlackCat
 author: Sg0luc
 date: 2023-09-09
+modified: 2025-05-03
 references:
   - https://attack.mitre.org/techniques/T1112/
   - https://attack.mitre.org/software/S1068/
 tags:
   - attack.defense-evasion
-  - ransomware
-  - blackcat
-
+  - attack.s1068
 logsource:
-  category: security
   product: windows
-
+  category: process_creation
 detection:
   Event:
-    EventID: 4688
     CommandLine|contains|all:
       - 'reg'
       - 'add'
@@ -26,12 +24,9 @@ detection:
       - 'MaxMpxCt'
       - '65535'
   condition: Event
-
-level: high
-
 falsepositives:
   - n/a
-
+level: high
 fields:
   - SubjectUserName
   - CommandLine

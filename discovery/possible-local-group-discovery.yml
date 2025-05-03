@@ -1,31 +1,27 @@
 title: Possible Local Group Discovery
+id: acb8e96c-ff80-491e-a29a-3889ea563332
 status: experimental
 description: Detecta possíveis descobertas de grupos locais via execução de comando
 author: Sg0luc
 date: 2023-09-10
+modified: 2025-05-03
 references:
-	- https://attack.mitre.org/techniques/T1069/001/
+  - https://attack.mitre.org/techniques/T1069/001/
 tags:
-	- attack.discovery
-
+  - attack.discovery
+  - attack.t1069.001
 logsource:
-	category: security
-	product: windows
-
+  product: windows
+  category: process_creation
 detection:
-	Event:
-		EventID: 4688
-		CommandLine|contains|all:
-			- 'net' # net or net1
-			- 'localgroup'
-
-	condition: Event
-
-level: low
-
+  Event:
+    CommandLine|contains|all:
+      - 'net' # net or net1
+      - 'localgroup'
+  condition: Event
 falsepositives:
-	- Atividades legítimas de enumeração de grupos
-
+  - Atividades legítimas de enumeração de grupos
+level: low
 fields:
-	- SubjectUserName
-	- CommandLine
+  - SubjectUserName
+  - CommandLine

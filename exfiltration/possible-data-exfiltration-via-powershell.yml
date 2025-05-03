@@ -1,32 +1,28 @@
 title: Possible Data Exfiltration via PowerShell
+id: f1843390-446d-4dd0-a11f-771b7ec154de
 status: experimental
 description: Detecta a execução de scripts PowerShell com as funções Add-Content, sucedido do comando Invoke-WebRequest para um ativo externo através do método POST
 author: Sg0luc
 date: 2023-09-09
+modified: 2025-05-03
 references:
-	- https://attack.mitre.org/techniques/T1041/
+  - https://attack.mitre.org/techniques/T1041/
 tags:
-	- attack.exfiltration
-	- c2
-
+  - attack.exfiltration
+  - attack.t1041
 logsource:
-	category: security
-	product: windows
-
+  product: windows
+  category: powershell
 detection:
-	Event:
-		EventID: 4104
-		CommandLine|contains|all:
-			- 'Add-Content'
-			- 'Invoke-WebRequest'
-			- '-Method POST'
-	condition: Event
-
-level: high
-
+  Event:
+    CommandLine|contains|all:
+      - 'Add-Content'
+      - 'Invoke-WebRequest'
+      - '-Method POST'
+  condition: Event
 falsepositives:
-	- n/a
-
+  - n/a
+level: high
 fields:
-	- SubjectUserName
-	- CommandLine
+  - SubjectUserName
+  - CommandLine

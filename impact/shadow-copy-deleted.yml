@@ -1,49 +1,44 @@
 title: Shadow Copy Deleted
+id: a1b8dd24-b23f-43a4-9e85-121ec7a0d25d
 status: experimental
 description: Detecta exclusões de shadow copies através do utilitário wmic.exe
 author: Sg0luc
 date: 2023-09-06
+modified: 2025-05-03
 references:
-	- https://attack.mitre.org/techniques/T1490/
-	- https://attack.mitre.org/software/S1068/
+  - https://attack.mitre.org/techniques/T1490/
+  - https://attack.mitre.org/software/S1068/
 tags:
-	- attack.impact
-	- blackcat
-	- ransomware
-
+  - attack.impact
+  - attack.t1490
 logsource:
-	category: security
-	product: windows
-
+  product: windows
+  category: process_creation
 detection:
-	Event:
-		EventID: 4688
-		CommandLine|contains:
-			- 'cmd' 
-			- 'powershell'
-	WMIC:
-		CommandLine|contains|all:
-			- 'wmic'
-			- 'shadowcopy'
-			- 'delete'
-	VSSAdmin:
-		CommandLine|contains|all:
-			- 'vssadmin'
-			- 'delete'
-			- 'shadows'
-	WBAdmin:
-		CommandLine|contains|all:
-			- 'wbadmin'
-			- 'delete'
-			- 'catalog'
-	condition: Event AND (WMIC OR VSSAdmin OR WBAdmin)
-
-level: high
-
+  Event:
+    CommandLine|contains:
+      - 'cmd'
+      - 'powershell'
+  WMIC:
+    CommandLine|contains|all:
+      - 'wmic'
+      - 'shadowcopy'
+      - 'delete'
+  VSSAdmin:
+    CommandLine|contains|all:
+      - 'vssadmin'
+      - 'delete'
+      - 'shadows'
+  WBAdmin:
+    CommandLine|contains|all:
+      - 'wbadmin'
+      - 'delete'
+      - 'catalog'
+  condition: Event and (WMIC or VSSAdmin ors WBAdmin)
 falsepositives:
-	- Atividades de rotina
-	- Execuções legítimas advindas de usuários de serviço
-
+  - Atividades de rotina
+  - Execuções legítimas advindas de usuários de serviço
+level: high
 fields:
-	- SubjectUserName
-	- CommandLine
+  - SubjectUserName
+  - CommandLine
