@@ -1,33 +1,29 @@
 title: Possible UAC Bypass
+id: 5f364f02-a5f0-4be3-b05e-8f9de5ebb9ad
 status: experimental
 description: Detecta eventos de possível desativação da chave EnableLUA no Windows, responsável pelo Controle de Conta de Usuário
 author: Sg0luc
 date: 2023-09-09
+modified: 2025-05-03
 references:
-	- https://attack.mitre.org/techniques/T1548/002/
+  - https://attack.mitre.org/techniques/T1548/002/
 tags:
-	- attack.privilege-escalation
-	- registry
-
+  - attack.privilege-escalation
+  - attack.t1548
 logsource:
-	category: security
-	product: windows
-
+  category: process_creation
+  product: windows
 detection:
-	Event:
-		EventID: 4688
-		CommandLine|contains|all:
-			- 'reg'
-			- 'add'
-			- 'EnableLUA'
-			- 'REG_DWORD /d 0'
-	condition: Event
-
+  Event:
+    CommandLine|contains|all:
+        - 'reg'
+        - 'add'
+        - 'EnableLUA'
+        - 'REG_DWORD /d 0'
+  condition: Event
 level: high
-
 falsepositives:
-	- n/a
-
+  - n/a
 fields:
-	- SubjectUserName
-	- CommandLine
+  - SubjectUserName
+  - CommandLine
