@@ -8,8 +8,8 @@ modified: 2025-05-03
 references:
   - https://attack.mitre.org/techniques/T1059/001/
 tags:
-  - attack.execution
-  - attack.t1059.001
+  - attack.defense-evasion
+  - attack.t1027
 logsource:
   product: windows
   category: powershell
